@@ -1,28 +1,12 @@
-# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
 
-# Build / distribution
 build/
 dist/
 *.egg-info/
 *.egg
 
-# Virtual environments
-venv/
-env/
-.env/
-.venv/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
+flashcardsfolder/
