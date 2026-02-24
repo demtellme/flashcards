@@ -18,7 +18,8 @@ pip install --user git+https://github.com/demtellme/flashcards.git
 
 ## Uninstall Command
 ```bash
-pipx uninstall falshcards```
+pipx uninstall falshcards
+```
  ## Commands:
     i - initialise the flashcard folder
     v - view all sets created
