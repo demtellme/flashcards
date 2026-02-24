@@ -1,6 +1,8 @@
 ## Flashcards
-A terminal based flashcard maker built with python.
-The minimalism brought by the terminal provides a distraction free experience with no ai, no purchases or flashy animations.
+A terminal based, cli flashcard maker built with python.
+The minimalism brought by the terminal provides a distraction free experience with no ai, no purchases and no flashy animations.
+This is an open soruce project that you are free to download, change and customise as its made mianly to practice and for personal use.
+Go use it to its fullest!
 Currently in very early development, more to come.
 
 
@@ -13,11 +15,14 @@ pipx install git+https://github.com/demtellme/flashcards.git
 # Or with pip
 pip install --user git+https://github.com/demtellme/flashcards.git
 ```
+
+## Uninstall Command
+```bash
+pipx uninstall falshcards```
  ## Commands:
     i - initialise the flashcard folder
     v - view all sets created
     ms - makes a set of flashcards
-    mf - makes a folder to contain flashcards, can be used for subjects/topics
     rs - removes specified set
     os - opens sepecific set to practice
 
