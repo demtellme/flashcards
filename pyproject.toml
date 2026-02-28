@@ -1,9 +1,9 @@
 [project]
 name = "flashcards"
-version = "0.1.0"
+version = "0.1.1"
 description = "CLI flashcards app"
 authors = [{name = "Alex G"}]
 requires-python = ">=3.8"
 
 [project.scripts]
-flashcards = "flashcards.cli:main"
+fcards = "flashcards.cli:main"
