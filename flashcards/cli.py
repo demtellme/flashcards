@@ -4,7 +4,7 @@ import random
 import shutil
 import sys
 
-BASEDIR = os.path.dirname(os.path.abspath(__file__))
+BASEDIR = os.path.expanduser("~")
 BASEFOLDER = os.path.join(BASEDIR, "flashcardsfolder")
 
 pid = os.getppid()
@@ -25,10 +25,10 @@ def help():
     print("""Commands:
     i - initialise the flashcard folder
     v <folder> - view all items created in a folder, if <folder> isnt specified it will show items in the base directory
-    ms <name> <folder> - makes a set of flashcards, if folder is specified it will add the set to the folder, if the folder dosent exist it will make it
-    rm <name> - removes specified item
-    ls <name> <folder> - open a set to learn, you get asked to define the terms in your flashcards, if folder not specified it defalts to default directory
-    os <name> <folder> - opens sepecific set to practice, just normal flipping of flashcards
+    ms <n> <folder> - makes a set of flashcards, if folder is specified it will add the set to the folder, if the folder dosent exist it will make it
+    rm <n> - removes specified item
+    ls <n> <folder> - open a set to learn, you get asked to define the terms in your flashcards, if folder not specified it defalts to default directory
+    os <n> <folder> - opens sepecific set to practice, just normal flipping of flashcards
     cf - displays the current working folder
     u <setname> - update a flashcard set, you can remove terms, add terms, update terms or definitions
     f <folder> - sets working folder to specified folder, to return to the original folder, just call `fcards f` with no additional arguments
@@ -47,14 +47,15 @@ def initflashcardfolder():
 def viewsets(folder=None):
     if not folder:
         folder = currentfolder
-    elif not os.path.exists(currentfolder):
+    elif not os.path.exists(folder):
         print("Flashcard folder isnt initialised, run: flashcards init")
     elif len(os.listdir(folder)) == 0:
         print(
             "You have no flashcard sets in this folder, make one with either ms or mf"
         )
     for i in os.listdir(folder):
-        if os.path.isfile(i):
+        fullpath = os.path.join(folder, i)
+        if os.path.isfile(fullpath):
             print("set - ", i.removesuffix(".txt"))
         else:
             print("folder - ", i)
@@ -84,8 +85,8 @@ def makeset(setname, folder=None):
         if term == "":
             break
         definition = input("enter a definition: ")
-        term.replace(":", "-")
-        definition.replace(":", "-")
+        term = term.replace(":", "-")
+        definition = definition.replace(":", "-")
         open(path, "a+").write(f"{term}:{definition}\n")
         print(f"added {term} : {definition}")
 
@@ -136,8 +137,8 @@ def learnset(settolearn, folder=None):
                 else:
                     print(f"You might have made a typo, the answer is {definition}")
 
-    except Exception:
-        print("The set you want to see dosent exist")
+    except Exception as err:
+        print("The set you want to see dosent exist", err)
 
 
 def openset(setname, folder=None):
@@ -200,8 +201,8 @@ def updateset(setname, folder=None):
                     if term == "":
                         break
                     definition = input("enter a definition: ")
-                    term.replace(":", "-")
-                    definition.replace(":", "-")
+                    term = term.replace(":", "-")
+                    definition = definition.replace(":", "-")
                     open(setpath, "a+").write(f"{term}:{definition}\n")
                     print(f"added {term} : {definition}")
             elif choice == "rm":
@@ -262,7 +263,9 @@ def changefolder(foldertogointo=None):
 
 
 def main():
-    os.chdir(currentfolder)
+    if os.path.exists(currentfolder):
+        os.chdir(currentfolder)
+
     if len(sys.argv) > 4:
         print(
             "To see list of commands, type `flashcards h`, you gave too many arguments"
