@@ -5,7 +5,7 @@ import shutil
 import sys
 
 BASEDIR = os.path.expanduser("~")
-BASEFOLDER = os.path.join(BASEDIR, "flashcardsfolder")
+BASEFOLDER = os.path.join(BASEDIR, ".flashcardsfolder")
 
 pid = os.getppid()
 
