@@ -26,7 +26,6 @@ pipx uninstall falshcards
 fcards <command> <argument one> <argument two>
 ```
  ## Commands:
-    i - initialise the flashcard folder
     v <folder> - view all items created in a folder, if <folder> isnt specified it will show items in the base directory
     ms <setname> <folder> - makes a set of flashcards, if folder is specified it will add the set to the folder, if the folder dosent exist it will make it
     rm <setname> - removes specified item

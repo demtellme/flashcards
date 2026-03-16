@@ -4,7 +4,7 @@ import random
 import shutil
 import sys
 
-BASEDIR = os.path.expanduser("~")
+BASEDIR = os.path.dirname(__file__)
 BASEFOLDER = os.path.join(BASEDIR, ".flashcardsfolder")
 
 pid = os.getppid()
@@ -23,7 +23,6 @@ else:
 
 def help():
     print("""Commands:
-    i - initialise the flashcard folder
     v <folder> - view all items created in a folder, if <folder> isnt specified it will show items in the base directory
     ms <n> <folder> - makes a set of flashcards, if folder is specified it will add the set to the folder, if the folder dosent exist it will make it
     rm <n> - removes specified item
@@ -33,16 +32,6 @@ def help():
     u <setname> - update a flashcard set, you can remove terms, add terms, update terms or definitions
     f <folder> - sets working folder to specified folder, to return to the original folder, just call `fcards f` with no additional arguments
     """)
-
-
-def initflashcardfolder():
-    print("Initialising flashcards...")
-    try:
-        os.mkdir(currentfolder)
-        print("Initialised sucessfully")
-    except Exception:
-        print("flashcards is already initialised, youre all ready to memorise")
-
 
 def viewsets(folder=None):
     if not folder:
@@ -287,7 +276,6 @@ def main():
 
     commands = {
         "h": help,
-        "i": initflashcardfolder,
         "v": viewsets,
         "ms": makeset,
         "rm": remove,
@@ -299,11 +287,7 @@ def main():
         "f": changefolder,
     }
     if command in commands:
-        if command != "i" and not os.path.exists(currentfolder):
-            print(
-                "You dont have the flashcards folder initialised, you should run `flashcards i` to initialise it."
-            )
-        elif argument1 and not argument2:
+        if argument1 and not argument2:
             commands[command](argument1)
         elif argument1 and argument2:
             commands[command](argument1, argument2)

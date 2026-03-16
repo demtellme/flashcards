@@ -9,4 +9,5 @@ dist/
 *.egg-info/
 *.egg
 
-flashcardsfolder/
+.flashcardsfolder/
+.gitignore
